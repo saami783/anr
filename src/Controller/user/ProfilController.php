@@ -66,6 +66,8 @@ class ProfilController extends AbstractController
             $this->entityManager->persist($avatar);
         }
         if ($addressForm->isSubmitted() && $addressForm->isValid()) {
+            $address->setStreet($addressForm->get('street')->getData());
+            $address->setUser($this->getUser());
             $this->entityManager->persist($address);
         }
 
@@ -73,6 +75,7 @@ class ProfilController extends AbstractController
             $avatarForm->isSubmitted() || $addressForm->isSubmitted())
         {
             $this->entityManager->flush();
+            $this->addFlash('success', 'Les modifications ont bien été apporté.');
             return $this->redirectToRoute('app_profil');
         }
 
@@ -81,6 +84,7 @@ class ProfilController extends AbstractController
             'passwordForm' => $passwordForm->createView(),
             'avatarForm' => $avatarForm->createView(),
             'addressForm' => $addressForm->createView(),
+            'address' => $address,
         ]);
     }
 

@@ -89,7 +89,7 @@ class RegistrationFormType extends AbstractType
                 $form->getParent()->add('street', EntityType::class, [
                     'class' => Street::class,
                     'choice_label' => 'name',
-                    'placeholder' => 'Select a Street',
+                    'placeholder' => 'Sélectionnez une rue',
                     'mapped' => false,
                     'choices' => $form->getData()->getStreets()
                 ]);

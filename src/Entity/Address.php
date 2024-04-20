@@ -17,7 +17,8 @@ class Address
     #[ORM\JoinColumn(nullable: false)]
     private ?Street $street = null;
 
-    #[ORM\OneToOne(inversedBy: 'address', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'address')]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", onDelete: "SET NULL")]
     private ?User $user = null;
 
     /* @TODO Redéfiinir le nom de la variable, on peut supposer qu'on accepte les termes suivant (BIS, TER etc..) */

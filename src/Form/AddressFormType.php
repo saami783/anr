@@ -42,7 +42,6 @@ class AddressFormType extends AbstractType
             ])
             ->add('save', SubmitType::class, [
                 'label' => "Sauvegarder",
-                'attr' => ['class' => 'btn-secondary']
             ])
         ;
         $builder->get('city')->addEventListener(

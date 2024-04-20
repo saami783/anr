@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\user;
 
+use App\Entity\Address;
 use App\Entity\City;
+use App\Entity\User;
 use App\Repository\StreetRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +14,18 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AddressController extends AbstractController
 {
+
+    #[Route('/delete-address/{id}', name: 'app_delete_address')]
+    public function deleteAddress(Address $address, EntityManagerInterface $entityManager): Response {
+        if ($this->getUser() === $address->getUser()) {
+            $entityManager->remove($address);
+            $entityManager->flush();
+            $this->addFlash('success', 'Adresse supprimée avec succès.');
+        } else {
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer une adresse qui ne vous appartient pas.');
+        }
+        return $this->redirectToRoute('app_profil');
+    }
 
     /**
      * Retourne une liste de rues pour une ville donnée au format JSON.
