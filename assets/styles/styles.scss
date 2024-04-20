@@ -1,0 +1,163 @@
+@import 'variables';
+
+.page-content {
+  padding-top: 160px;
+  padding-bottom: 160px;
+}
+
+// =========================================
+// Homepage
+// =========================================
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+  transform: translateX(60px);
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.image-container {
+  @media screen and (max-width: $medium-screen) {
+    display: none;
+  }
+}
+
+.key-figures-container {
+  background-color: $soft-blue;
+}
+
+.key-figures-container {
+  background-color: $soft-blue;
+  display: flex;
+  align-items: center;
+  height: 160px;
+  margin-top: 6rem;
+  margin-bottom: 4rem;
+}
+
+.key-figure-number {
+  font-family: $secondary-font;
+  font-size: $h2-font-size;
+  line-height: 48px;
+  color: $slate-gray;
+}
+
+.key-figure-text {
+  font-family: $secondary-font;
+  font-size: $h3-font-size;
+  line-height: 48px;
+  letter-spacing: 0.105em;
+  color: $vivid-purple;
+}
+
+// =========================================
+// Page d'inscription
+// =========================================
+
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
+  opacity: 100%;
+  transform: scale(.85) translateY(-2rem) translateX(.15rem);
+}
+
+.form-floating > .form-control {
+  min-height: 3rem;
+  height: 3rem;
+  padding-top: 12px !important;
+  padding-bottom: 10px !important;
+}
+
+.form-control {
+  margin-bottom: 25px;
+  width: 100%;
+  box-sizing: border-box;
+
+
+  label {
+    color: $light-gray;
+  }
+}
+
+.form-control::placeholder {
+  color: #aaa;
+}
+
+#email .form-control {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-bottom-color: $dark-blue;
+  border-radius: 0 0 0 0;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+
+// =========================================
+// Header
+// =========================================
+
+#navbar {
+  background-color: transparent;
+  height: 100px;
+}
+
+.navbar-brand {
+  color: $blue-gray;
+  font-weight: 700;
+  font-size: $h3-font-size;
+}
+
+.opaque-navbar {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out;
+}
+
+@media (min-width: $large-screen) {
+  #navbar .container-fluid {
+    width: 1300px;
+  }
+}
+
+// =========================================
+// Footer
+// =========================================
+
+.footer {
+  height: 216px;
+  padding: 20px 0;
+  background-color: $soft-blue;
+  .footer-link {
+    margin: 0 10px;
+    color: $dark-blue;
+    text-decoration: none;
+  }
+  hr {
+    border-color: #ccc;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: $large-screen) {
+  footer .container {
+    width: 1300px;
+  }
+}

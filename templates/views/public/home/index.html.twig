@@ -1,0 +1,69 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-md-12 col-lg-4">
+                <h1 class="text-lg-start mb-lg-4" style="margin-top: 100px;">Bienvenue sur CityOne</h1>
+                <p class="mb-lg-4">CityOne simplifie la gestion et la consultation des adresses pour les
+                    administrateurs et les résidents de la ville. Notre plateforme vous permet de créer, modifier,
+                    ou supprimer des adresses basées sur les entités rues et villes, tout en facilitant la recherche
+                    d'utilisateurs par localisation.</p>
+                <div class="d-lg-flex text-lg-start">
+                    <a class="btn btn-primary me-lg-3" href="" >Démarrer</a>
+                    <a href="" class="btn btn-outline-primary">En savoir plus</a>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+
+    <div class="row key-figures-container justify-content-lg-center" style="height: 50px;"> </div>
+
+    <div class="container mb-lg-6">
+
+        <div class="row mb-lg-5">
+            <div class="col-lg-5"></div>
+            <div class="col-lg-6 col-md-12">
+                <div class="row">
+                    <h2>Explorez les fonctionnalités de CityOne</h2>
+                    <p>CityOne offre une interface intuitive pour tous les utilisateurs,
+                        permettant une gestion efficace des adresses urbaines :</p>
+
+                    <div class="col-lg-1 mb-lg-2 image-container">
+                        <img class="icon" src="{{ asset('build/icons/user.svg') }}" alt="user icon">
+                        <img class="icon" src="{{ asset('build/icons/building.svg') }}" alt="building icon">
+                        <img class="icon" src="{{ asset('build/icons/search.svg') }}" alt="search icon">
+                        <img class="icon" src="{{ asset('build/icons/upload.svg') }}" alt="upload icon">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 mb-lg-4">
+                            <h4>Authentification et Inscription</h4>
+                            <p>Accédez à votre compte facilement sans vérification par mail. Commencez immédiatement à gérer vos informations personnelles et vos adresses.</p>
+                        </div>
+                        <div class="col-lg-6 mb-lg-4">
+                            <h4>Gestion des Adresses</h4>
+                            <p>Créez, modifiez et supprimez des adresses à partir des entités villes et rues enregistrées dans notre base de données, rendant la navigation urbaine plus accessible.</p>
+                        </div>
+                        <div class="col-lg-6 mb-lg-4">
+                            <h4>Recherche par Localisation</h4>
+                            <p>Les administrateurs peuvent facilement rechercher des utilisateurs par rue ou ville, optimisant ainsi la gestion communale.</p>
+                        </div>
+                        <div class="col-lg-6 mb-lg-4">
+                            <h4>Upload d'Images de Profil</h4>
+                            <p>Personnalisez votre profil en téléchargeant une image de votre choix, enrichissant votre expérience utilisateur sur notre plateforme.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+

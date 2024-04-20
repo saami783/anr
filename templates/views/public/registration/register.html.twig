@@ -1,0 +1,72 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container page-content">
+        <div class="row">
+            <div class="col-md-12 col-lg-4 mx-lg-auto">
+                <h2 class="text-lg-center mb-lg-4">Créer votre compte !</h2>
+                {{ form_start(registrationForm) }}
+
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.name, {'attr': {'class': 'form-input'}}) }}
+                    {{ form_label(registrationForm.name) }}
+                    {{ form_errors(registrationForm.name) }}
+                </div>
+
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input'}}) }}
+                    {{ form_label(registrationForm.email) }}
+                    {{ form_errors(registrationForm.email) }}
+                </div>
+
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.password, {'attr': {'class': 'form-input'}}) }}
+                    {{ form_label(registrationForm.password) }}
+                    {{ form_errors(registrationForm.password) }}
+                </div>
+
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.city, {'attr': {'class': 'form-input dynamic-city-select'}}) }}
+                    {{ form_label(registrationForm.city) }}
+                    {{ form_errors(registrationForm.city) }}
+                </div>
+                <br>
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.street, {'attr': {'class': 'form-input dynamic-street-select'}}) }}
+                    {{ form_label(registrationForm.street) }}
+                    {{ form_errors(registrationForm.street) }}
+                </div>
+                <br>
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.number, {'attr': {'class': 'form-input'}}) }}
+                    {{ form_label(registrationForm.number) }}
+                    {{ form_errors(registrationForm.number) }}
+                </div>
+
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-input'}}) }}
+                    {{ form_label(registrationForm.agreeTerms) }}
+                    {{ form_errors(registrationForm.agreeTerms) }}
+                </div>
+
+                <div class="row mt-lg-4 mb-lg-3">
+                    <div class="col-lg-8 mx-lg-auto">
+                        {{ form_row(registrationForm.save) }}
+                    </div>
+                </div>
+
+                {{ form_end(registrationForm) }}
+
+                <p class="text-lg-center">Vous avez déjà un compte ? <a
+                            href="{{ path('app_login') }}">Connectez-vous</a></p>
+            </div>
+        </div>
+    </div>
+
+    {% block scripts %}
+        {{ encore_entry_script_tags('dynamic-street-loader') }}
+    {% endblock %}
+{% endblock %}
+

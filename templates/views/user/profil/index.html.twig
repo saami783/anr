@@ -1,0 +1,69 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+        <div class="container">
+            <h1>Gestion de votre compte</h1>
+            <p>Mettez à jour vos informations personnelles, changez votre mot de passe ou mettez à jour votre adresse
+                pour assurer que votre profil reste à jour.</p>
+
+            <!-- Informations du compte -->
+            <section>
+                <h2>Informations du compte</h2>
+                {{ form_start(infoForm) }}
+                {{ form_row(infoForm.email) }}
+                {{ form_row(infoForm.name) }}
+                <button type="submit" class="btn btn-primary">Sauvegarder les informations</button>
+                {{ form_end(infoForm) }}
+            </section>
+
+            <!-- Mise à jour du mot de passe -->
+            <section>
+                <h2>Mettre à jour le mot de passe</h2>
+                {{ form_start(passwordForm) }}
+                {{ form_row(passwordForm.plainPassword) }}
+                <button type="submit" class="btn btn-primary">Changer le mot de passe</button>
+                {{ form_end(passwordForm) }}
+            </section>
+
+            <!-- Avatar -->
+            <section>
+                <h2>Avatar</h2>
+                {{ form_start(avatarForm) }}
+                {{ form_widget(avatarForm) }}
+                <button type="submit" class="btn btn-primary">Mettre à jour l'avatar</button>
+                {{ form_end(avatarForm) }}
+            </section>
+
+            <!-- Adresse -->
+            <section>
+                <h2>Mon adresse</h2>
+                {{ form_start(addressForm) }}
+                {{ form_row(addressForm.city, {'attr': {'class': 'dynamic-city-select'}}) }}
+                {{ form_row(addressForm.street, {'attr': {'class': 'dynamic-street-select'}}) }}
+                {{ form_row(addressForm.number) }}
+
+                {{ form_row(addressForm.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                {{ form_label(addressForm.save) }}
+
+                {{ form_end(addressForm) }}
+            </section>
+
+            <!-- Suppression du compte -->
+            <section>
+                <h2>Supprimer mon compte</h2>
+                <p>Une fois votre compte supprimé, toutes ses ressources et données seront définitivement supprimées.
+                    Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous
+                    souhaitez conserver.</p>
+                <a href="{{ path('app_profil_delete') }}" class="btn btn-danger">Supprimer mon compte</a>
+            </section>
+        </div>
+    </div>
+
+    {% block scripts %}
+        {{ encore_entry_script_tags('dynamic-street-loader') }}
+    {% endblock %}
+{% endblock %}

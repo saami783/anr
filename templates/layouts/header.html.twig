@@ -1,0 +1,25 @@
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent">
+    <div class="container-fluid">
+
+        <div class="navbar-nav me-auto ps-lg-5">
+            <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="nav-link" href="">Panel admin</a>
+            {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a class="nav-link" href="{{ path('app_profil') }}">Mon profil</a>
+            {% endif %}
+        </div>
+
+        <a class="navbar-brand mx-auto" href="{{ path('app_home') }}">CityConnect</a>
+
+        <div class="ms-auto pe-lg-5">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a id="dashboard" class="btn btn-secondary" type="button" href="{{ path('app_logout') }}">Se
+                    déconnecter</a>
+            {% else %}
+                <a id="connexion" class="btn btn-secondary" type="button" href="{{ path('app_login') }}">Connexion/Inscription</a>
+            {% endif %}
+        </div>
+
+    </div>
+</nav>
