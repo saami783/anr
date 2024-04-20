@@ -17,7 +17,7 @@
       <div class="col-md-6 text-md-start text-center">
         <a href="{{ path('app_home') }}" class="footer-link">Accueil</a>
         {% if is_granted('ROLE_ADMIN') %}
-          <a href="" class="footer-link">Panel admin</a>
+          <a href="{{ path('app_admin') }}" class="footer-link">Panel admin</a>
         {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
           <a href="{{ path('app_profil') }}" class="footer-link">Mon profil</a>
         {% endif %}
