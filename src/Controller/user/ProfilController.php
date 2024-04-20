@@ -55,27 +55,33 @@ class ProfilController extends AbstractController
         $avatarForm->handleRequest($request);
         $addressForm->handleRequest($request);
 
+        $changesMade = false;
         if ($infoForm->isSubmitted() && $infoForm->isValid()) {
             $this->userRepository->save($user, true);
+            $changesMade = true;
         }
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
             $newPlainTextPassword = $passwordForm->get('plainPassword')->getData();
             $this->userRepository->upgradePassword($user, $newPlainTextPassword);
+            $changesMade = true;
         }
         if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+            if ($avatar->getUser() === null) {
+                $avatar->setUser($user);
+            }
             $this->entityManager->persist($avatar);
+            $changesMade = true;
         }
         if ($addressForm->isSubmitted() && $addressForm->isValid()) {
             $address->setStreet($addressForm->get('street')->getData());
             $address->setUser($this->getUser());
             $this->entityManager->persist($address);
+            $changesMade = true;
         }
 
-        if ($infoForm->isSubmitted() || $passwordForm->isSubmitted() ||
-            $avatarForm->isSubmitted() || $addressForm->isSubmitted())
-        {
+        if ($changesMade) {
             $this->entityManager->flush();
-            $this->addFlash('success', 'Les modifications ont bien été apporté.');
+            $this->addFlash('success', 'Les modifications ont bien été apportées.');
             return $this->redirectToRoute('app_profil');
         }
 

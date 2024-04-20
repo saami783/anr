@@ -44,6 +44,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     private ?string $password = null;
 
     #[ORM\Column(length: 70)]
+    #[Assert\Length(
+        min: 2,
+        max: 70,
+        minMessage: "Votre nom contenir au moins {{ limit }} caractères.",
+        maxMessage: "Votre nom ne doit pas dépasser {{ limit }} caractères.",
+        groups: ["user"],
+    )]
     private ?string $name = null;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
