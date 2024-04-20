@@ -42,9 +42,11 @@
             <!-- Adresse -->
             <section>
                 <h2>Mon adresse</h2>
-                <p> dd </p>
                 {% if address.id %}
-                    <a href="{{ path('app_delete_address', {'id': address.id}) }}" class="btn btn-danger">Supprimer mon adresse</a>
+                    <p> {{ address }} </p>
+                    <a href="{{ path('app_delete_address', {'id': address.id}) }}" class="btn btn-danger">
+                        Supprimer mon adresse
+                    </a>
                 {% endif %}
                 <div style="height: 10px;"></div>
                 {{ form_start(addressForm) }}

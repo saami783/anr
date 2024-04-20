@@ -16,7 +16,11 @@
     <div class="row mb-3">
       <div class="col-md-6 text-md-start text-center">
         <a href="{{ path('app_home') }}" class="footer-link">Accueil</a>
-      {#    @TODO Afficher dynamiquement les liens pour les utilisateurs authentifié     #}
+        {% if is_granted('ROLE_ADMIN') %}
+          <a href="" class="footer-link">Panel admin</a>
+        {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <a href="{{ path('app_profil') }}" class="footer-link">Mon profil</a>
+        {% endif %}
       </div>
     </div>
   </div>
