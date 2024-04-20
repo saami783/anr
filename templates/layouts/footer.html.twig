@@ -5,8 +5,8 @@
             <div class="col-md-6 text-md-start text-center">
 
                 <a href="{{ path('app_home') }}" class="footer-link">Accueil</a>
-                <a href="{{ path('app_home') }}" class="footer-link">Villes</a>
-                <a href="{{ path('app_home') }}" class="footer-link">Rues</a>
+                <a href="{{ path('app_cities') }}" class="footer-link">Villes</a>
+                <a href="{{ path('app_streets') }}" class="footer-link">Rues</a>
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <a href="{{ path('app_profil') }}" class="footer-link">Mon profil</a>
                     {% if is_granted('ROLE_ADMIN') %}
