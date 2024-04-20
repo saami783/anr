@@ -20,6 +20,7 @@ class AvatarFormType extends AbstractType
                 'download_uri' => true,
                 'download_label' => 'Télécharger mon avatar',
                 'label' => 'Avatar (Format png, jpg, jpeg)',
+                'imagine_pattern' => 'my_thumb',
             ]);
     }
 
