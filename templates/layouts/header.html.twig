@@ -1,12 +1,12 @@
-<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top opaque-navbar">
     <div class="container-fluid">
-
         <div class="navbar-nav me-auto ps-lg-5">
             <a href="{{ path('app_home') }}" class="nav-link">Accueil</a>
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('app_admin') }}" class="nav-link">Panel admin</a>
-            {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <a href="{{ path('app_profil') }}" class="nav-link">Mon profil</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_admin') }}" class="nav-link">Panel admin</a>
+                {% endif %}
             {% endif %}
         </div>
 
@@ -14,12 +14,10 @@
 
         <div class="ms-auto pe-lg-5">
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <a href="{{ path('app_logout') }}"id="dashboard" class="btn btn-secondary" type="button">Se
-                    déconnecter</a>
+                <a href="{{ path('app_logout') }}" id="dashboard" class="btn btn-secondary" type="button">Se déconnecter</a>
             {% else %}
-                <a href="{{ path('app_login') }}" id="connexion" class="btn btn-secondary" type="button" >Connexion/Inscription</a>
+                <a href="{{ path('app_login') }}" id="connexion" class="btn btn-secondary" type="button">Connexion/Inscription</a>
             {% endif %}
         </div>
-
     </div>
 </nav>
