@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+
+    <div style="height: 120px;"></div>
+
+    <div class="example-wrapper">
+
+        <div class="container">
+            <section class="mb-4 p-3 bg-white rounded shadow" style="opacity: 0.98;">
+                <h2>Recherche d'utilisateurs</h2>
+                {{ form(form) }}
+            </section>
+        </div>
+    </div>
+
+    {% if users is not empty %}
+        <h2>Résultats de la recherche</h2>
+        <ul>
+            {% for user in users %}
+                <li>{{ user.email }} - adresse : {{ user.address }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\City;
+use App\Entity\Street;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -72,5 +74,27 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getOneOrNullResult()
             ;
     }
+
+    public function findByCityOrStreet(?City $city, ?Street $street)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->innerJoin('u.address', 'a')
+            ->innerJoin('a.street', 's')
+            ->innerJoin('s.city', 'c');
+
+        if ($city) {
+            $qb->andWhere('c = :city')
+                ->setParameter('city', $city);
+        }
+
+        if ($street) {
+            $qb->andWhere('s = :street')
+                ->setParameter('street', $street);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 
 }

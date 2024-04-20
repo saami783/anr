@@ -3,9 +3,18 @@
         <div class="navbar-nav me-auto ps-lg-5">
             <a href="{{ path('app_home') }}" class="nav-link">Accueil</a>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <a href="{{ path('app_profil') }}" class="nav-link">Mon profil</a>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_admin') }}" class="nav-link">Panel admin</a>
+                    <a href="{{ path('app_admin') }}" class="nav-link">Recherche admin</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Consulter
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="">Villes</a></li>
+                            <li><a class="dropdown-item" href="">Rues</a></li>
+                        </ul>
+                    </li>
                 {% endif %}
             {% endif %}
         </div>
@@ -14,10 +23,32 @@
 
         <div class="ms-auto pe-lg-5">
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <a href="{{ path('app_logout') }}" id="dashboard" class="btn btn-secondary" type="button">Se déconnecter</a>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if app.user.avatar %}
+                            <img src="{{ asset('uploads/avatars/' ~ app.user.avatar.fileName) }}"
+                                 style="width: 30px; height: 30px;" alt="avatar"/>
+                        {% else %}
+                            <img src="{{ asset('build/avatar-default.svg') }}" style="width: 30px; height: 30px;"
+                                 alt="avatar"/>
+                        {% endif %}
+                        {{ app.user.name }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li style="list-style-type: none;"><a class="dropdown-item" href="{{ path('app_profil') }}">Mon
+                                profil</a></li>
+                        <li style="list-style-type: none;">
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li style="list-style-type: none;"><a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </li>
+                    </ul>
+                </div>
             {% else %}
                 <a href="{{ path('app_login') }}" id="connexion" class="btn btn-secondary" type="button">Connexion/Inscription</a>
             {% endif %}
         </div>
+
     </div>
 </nav>
