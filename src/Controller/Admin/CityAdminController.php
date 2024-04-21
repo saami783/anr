@@ -9,13 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Repository\CityRepository;
 
 class CityAdminController extends AbstractController
 {
 
-    public function __construct(private CityRepository $cityRepository,
-                                private EntityManagerInterface $entityManager)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
 
     }
@@ -51,6 +49,7 @@ class CityAdminController extends AbstractController
         $cityForm->handleRequest($request);
 
         if($cityForm->isSubmitted() && $cityForm->isValid()) {
+            $city->setUpdatedAt(new \DateTimeImmutable());
             $this->entityManager->persist($city);
             $this->entityManager->flush();
             return $this->redirectToRoute('app_cities');

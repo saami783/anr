@@ -1,0 +1,11 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}{{ street }}{% endblock %}
+
+{% block body %}
+
+{#  @TODO faire le rendu sous forme de tableau.  #}
+    <div style="height: 120px;"></div>
+    <p> {{ street.id }} - {{ street.name }} {{ street.city }}</p>
+
+{% endblock %}
