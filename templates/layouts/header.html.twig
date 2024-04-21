@@ -1,56 +1,59 @@
-{# @TODO Rendre responsive le header #}
-
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top opaque-navbar">
     <div class="container-fluid">
-        <div class="navbar-nav me-auto ps-lg-5">
-            <a href="{{ path('app_home') }}" class="nav-link">Accueil</a>
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_admin') }}" class="nav-link">Recherche admin</a>
-                {% endif %}
-            {% endif %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    Consulter
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a href="{{ path('app_cities') }}" class="dropdown-item">Villes</a></li>
-                    <li><a href="{{ path('app_streets') }}" class="dropdown-item">Rues</a></li>
-                </ul>
-            </li>
-        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         <a href="{{ path('app_home') }}" class="navbar-brand mx-auto">CityConnect</a>
 
-        <div class="ms-auto pe-lg-5">
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        {% if app.user.avatar %}
-                            <img src="{{ asset('uploads/avatars/' ~ app.user.avatar.fileName) }}"
-                                 style="width: 30px; height: 30px;" alt="avatar"/>
-                        {% else %}
-                            <img src="{{ asset('build/avatar-default.svg') }}" style="width: 30px; height: 30px;"
-                                 alt="avatar"/>
-                        {% endif %}
-                        {{ app.user.name }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li style="list-style-type: none;"><a class="dropdown-item" href="{{ path('app_profil') }}">Mon
-                                profil</a></li>
-                        <li style="list-style-type: none;">
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li style="list-style-type: none;"><a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-                        </li>
-                    </ul>
-                </div>
-            {% else %}
-                <a href="{{ path('app_login') }}" id="connexion" class="btn btn-secondary" type="button">Connexion/Inscription</a>
-            {% endif %}
-        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav me-auto">
+                <a href="{{ path('app_home') }}" class="nav-link">Accueil</a>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}" class="nav-link">Recherche admin</a>
+                    {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Consulter
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a href="{{ path('app_cities') }}" class="dropdown-item">Villes</a></li>
+                            <li><a href="{{ path('app_streets') }}" class="dropdown-item">Rues</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </div>
 
+            <div class="ms-auto">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if app.user.avatar %}
+                                <img src="{{ asset('uploads/avatars/' ~ app.user.avatar.fileName) }}"
+                                     style="width: 30px; height: 30px;" alt="avatar"/>
+                            {% else %}
+                                <img src="{{ asset('build/avatar-default.svg') }}" style="width: 30px; height: 30px;"
+                                     alt="avatar"/>
+                            {% endif %}
+                            {{ app.user.name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li style="list-style-type: none;"><a class="dropdown-item" href="{{ path('app_profil') }}">Mon
+                                    profil</a></li>
+                            <li style="list-style-type: none;">
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li style="list-style-type: none;"><a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a href="{{ path('app_login') }}" id="connexion" class="btn btn-secondary" type="button">Connexion/Inscription</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </nav>
