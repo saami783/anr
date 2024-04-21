@@ -20,8 +20,8 @@ class CityAdminController extends AbstractController
 
     #[Route('/admin/creer/ville', name: 'app_admin_city_create')]
     public function create(Request $request): Response {
-        $this->denyAccessUnlessGranted('NEW', new City());
         $city = new City();
+        $this->denyAccessUnlessGranted('NEW', $city);
 
         $cityForm = $this->createForm(CityFormType::class, $city);
         $cityForm->handleRequest($request);

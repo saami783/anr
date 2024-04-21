@@ -26,16 +26,13 @@ class CityVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::EDIT:
-                return $this->canEdit($user);
-            case self::NEW:
-                return $this->canCreate($user);
-            case self::DELETE:
-                return $this->canDelete($user);
-        }
+        return match ($attribute) {
+            self::EDIT => $this->canEdit($user),
+            self::NEW => $this->canCreate($user),
+            self::DELETE => $this->canDelete($user),
+            default => false,
+        };
 
-        return false;
     }
 
     private function canEdit(UserInterface $user): bool

@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Street;
 use App\Form\StreetFormType;
-use App\Repository\StreetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +21,7 @@ class StreetAdminController extends AbstractController
     #[Route('/admin/creer/rue', name: 'app_admin_street_create')]
     public function create(Request $request): Response {
         $street = new Street();
-
+        $this->denyAccessUnlessGranted('NEW', $street);
         $streetForm = $this->createForm(StreetFormType::class, $street);
         $streetForm->handleRequest($request);
 
@@ -40,7 +39,7 @@ class StreetAdminController extends AbstractController
 
     #[Route('/admin/rue/{id}/edit', name: 'app_admin_street_update')]
     public function update(Street $street, Request $request): Response {
-
+        $this->denyAccessUnlessGranted('EDIT', $street);
         $streetForm = $this->createForm(StreetFormType::class, $street);
         $streetForm->handleRequest($request);
 
@@ -59,6 +58,7 @@ class StreetAdminController extends AbstractController
 
     #[Route('/admin/rue/{id}/delete', name: 'app_admin_street_delete', methods: 'POST')]
     public function delete(Street $street, Request $request): Response {
+        $this->denyAccessUnlessGranted('DELETE', $street);
         $csrfToken = $request->request->get('_token');
         if($this->isCsrfTokenValid('delete'.$street->getId(), $csrfToken)) {
             $this->addFlash('error', 'Invalid CSRF token');

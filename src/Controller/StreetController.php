@@ -20,7 +20,7 @@ class StreetController extends AbstractController
 
     #[Route('/rue/{id}', name: 'app_admin_street_detail')]
     public function detail(Street $street): Response {
-        return $this->render('views/admin/street/detail.html.twig', [
+        return $this->render('views/public/street/detail.html.twig', [
             'street' => $street
         ]);
     }

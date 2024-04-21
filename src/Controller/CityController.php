@@ -20,6 +20,6 @@ class CityController extends AbstractController
 
     #[Route('/ville/{id}', name: 'app_admin_city_detail')]
     public function detail(City $city): Response {
-        return $this->render('views/admin/city/detail.html.twig', ['city' => $city]);
+        return $this->render('views/public/city/detail.html.twig', ['city' => $city]);
     }
 }
