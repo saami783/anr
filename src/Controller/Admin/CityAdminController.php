@@ -3,8 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\City;
-use App\Form\SearchFormType;
-use App\Repository\UserRepository;
+use App\Form\CityFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,12 +25,52 @@ class CityAdminController extends AbstractController
         return $this->render('views/admin/city/detail.html.twig', ['city' => $city]);
     }
 
-    #[Route('/admin/ville/rue', name: 'app_admin_city_create')]
-    public function create() { }
+    #[Route('/admin/creer/ville', name: 'app_admin_city_create')]
+    public function create(Request $request): Response {
+        $city = new City();
 
-    #[Route('/admin/ville/{city}/update', name: 'app_admin_city_update')]
-    public function update(): void { }
+        $cityForm = $this->createForm(CityFormType::class, $city);
+        $cityForm->handleRequest($request);
 
-    #[Route('/admin/ville/{city}/delete', name: 'app_admin_city_delete')]
-    public function delete(): void { }
+        if($cityForm->isSubmitted() && $cityForm->isValid()) {
+            $city->setCreatedAt(new \DateTimeImmutable());
+            $this->entityManager->persist($city);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('app_cities');
+        }
+
+        return $this->render('views/admin/city/new.html.twig', [
+            'cityForm' => $cityForm->createView(),
+        ]);
+    }
+
+    #[Route('/admin/ville/{id}/update', name: 'app_admin_city_update')]
+    public function update(City $city, Request $request): Response {
+
+        $cityForm = $this->createForm(CityFormType::class, $city);
+        $cityForm->handleRequest($request);
+
+        if($cityForm->isSubmitted() && $cityForm->isValid()) {
+            $this->entityManager->persist($city);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('app_cities');
+        }
+
+        return $this->render('views/admin/city/update.html.twig', [
+            'cityForm' => $cityForm->createView(),
+            'city' => $city,
+        ]);
+    }
+
+    #[Route('/admin/ville/{id}/delete', name: 'app_admin_city_delete', methods: 'POST')]
+    public function delete(City $city, Request $request): Response {
+        $csrfToken = $request->request->get('_token');
+        if($this->isCsrfTokenValid('delete'.$city->getId(), $csrfToken)) {
+            $this->addFlash('error', 'Invalid CSRF token');
+            return $this->redirectToRoute('app_cities');
+        }
+        $this->entityManager->remove($city);
+        $this->entityManager->flush();
+        return $this->redirectToRoute('app_cities');
+    }
 }

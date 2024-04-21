@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Modifier la ville de {{ city }}{% endblock %}
+
+{% block body %}
+
+    <div style="height: 120px;"></div>
+
+    <div class="example-wrapper">
+        <div class="container">
+
+            <section class="mb-4 p-3 bg-white rounded shadow" style="opacity: 0.98;">
+                <h2>Modifier la ville de {{ city }}</h2>
+                {{ form_start(cityForm, {'attr': {'class': 'form-horizontal w-50'}}) }}
+                {{ form_row(cityForm.name, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                <button type="submit" class="btn btn-primary mt-2 btn-sm rounded-pill" style="width: auto;">
+                    Mettre à jour
+                </button>
+                {{ form_end(cityForm) }}
+            </section>
+        </div>
+    </div>
+{% endblock %}
