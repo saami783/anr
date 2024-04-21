@@ -19,13 +19,6 @@ class StreetAdminController extends AbstractController
 
     }
 
-    #[Route('/admin/rue/{id}', name: 'app_admin_street_detail')]
-    public function detail(Street $street): Response {
-        return $this->render('views/admin/street/detail.html.twig', [
-            'street' => $street
-        ]);
-    }
-
     #[Route('/admin/creer/rue', name: 'app_admin_street_create')]
     public function create(Request $request): Response {
         $street = new Street();
@@ -45,7 +38,7 @@ class StreetAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/rue/{id}/update', name: 'app_admin_street_update')]
+    #[Route('/admin/rue/{id}/edit', name: 'app_admin_street_update')]
     public function update(Street $street, Request $request): Response {
 
         $streetForm = $this->createForm(StreetFormType::class, $street);

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Street;
 use App\Repository\StreetRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,13 @@ class StreetController extends AbstractController
     {
         return $this->render('views/public/street/index.html.twig', [
             'streets' => $streetRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/rue/{id}', name: 'app_admin_street_detail')]
+    public function detail(Street $street): Response {
+        return $this->render('views/admin/street/detail.html.twig', [
+            'street' => $street
         ]);
     }
 }

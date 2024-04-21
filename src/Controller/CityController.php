@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
 use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,5 +16,10 @@ class CityController extends AbstractController
         return $this->render('views/public/city/index.html.twig', [
             'cities' => $cityRepository->findAll(),
         ]);
+    }
+
+    #[Route('/ville/{id}', name: 'app_admin_city_detail')]
+    public function detail(City $city): Response {
+        return $this->render('views/admin/city/detail.html.twig', ['city' => $city]);
     }
 }

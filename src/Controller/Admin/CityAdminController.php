@@ -18,13 +18,9 @@ class CityAdminController extends AbstractController
 
     }
 
-    #[Route('/admin/ville/{id}', name: 'app_admin_city_detail')]
-    public function detail(City $city): Response {
-        return $this->render('views/admin/city/detail.html.twig', ['city' => $city]);
-    }
-
     #[Route('/admin/creer/ville', name: 'app_admin_city_create')]
     public function create(Request $request): Response {
+        $this->denyAccessUnlessGranted('NEW', new City());
         $city = new City();
 
         $cityForm = $this->createForm(CityFormType::class, $city);
@@ -42,9 +38,9 @@ class CityAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/ville/{id}/update', name: 'app_admin_city_update')]
+    #[Route('/admin/ville/{id}/edit', name: 'app_admin_city_update')]
     public function update(City $city, Request $request): Response {
-
+        $this->denyAccessUnlessGranted('EDIT', $city);
         $cityForm = $this->createForm(CityFormType::class, $city);
         $cityForm->handleRequest($request);
 
@@ -63,6 +59,7 @@ class CityAdminController extends AbstractController
 
     #[Route('/admin/ville/{id}/delete', name: 'app_admin_city_delete', methods: 'POST')]
     public function delete(City $city, Request $request): Response {
+        $this->denyAccessUnlessGranted('DELETE', $city);
         $csrfToken = $request->request->get('_token');
         if($this->isCsrfTokenValid('delete'.$city->getId(), $csrfToken)) {
             $this->addFlash('error', 'Invalid CSRF token');

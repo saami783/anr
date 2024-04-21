@@ -2,45 +2,54 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\City;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class CityVoter extends Voter
 {
-    public const EDIT = 'POST_EDIT';
-    public const VIEW = 'POST_VIEW';
+    const EDIT = 'EDIT';
+    const NEW = 'NEW';
+    const DELETE = 'DELETE';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::EDIT, self::VIEW])
-            && $subject instanceof \App\Entity\City;
+        return in_array($attribute, [self::EDIT, self::NEW, self::DELETE]) && $subject instanceof City;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
 
-        // if the user is anonymous, do not grant access
         if (!$user instanceof UserInterface) {
             return false;
         }
 
-        // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case self::EDIT:
-                // logic to determine if the user can EDIT
-                // return true or false
-                break;
-
-            case self::VIEW:
-                // logic to determine if the user can VIEW
-                // return true or false
-                break;
+                return $this->canEdit($user);
+            case self::NEW:
+                return $this->canCreate($user);
+            case self::DELETE:
+                return $this->canDelete($user);
         }
 
         return false;
+    }
+
+    private function canEdit(UserInterface $user): bool
+    {
+        return in_array('ROLE_ADMIN', $user->getRoles());
+    }
+
+    private function canCreate(UserInterface $user): bool
+    {
+        return in_array('ROLE_ADMIN', $user->getRoles());
+    }
+
+    private function canDelete(UserInterface $user): bool
+    {
+        return in_array('ROLE_ADMIN', $user->getRoles());
     }
 }
