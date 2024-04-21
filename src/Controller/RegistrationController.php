@@ -55,7 +55,7 @@ class RegistrationController extends AbstractController
 
             $password = $registrationForm->get('password')->getData();
             $user->setPassword($userPasswordHasher->hashPassword($user, $password));
-
+            $user->setCreatedAt(new \DateTimeImmutable());
             $address = new Address();
             $address->setStreet($registrationForm->get('street')->getData());
             $address->setNumber($registrationForm->get('number')->getData());

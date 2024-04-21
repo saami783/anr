@@ -10,6 +10,9 @@ use App\Enum\UserRoleEnum;
 
 class LoginTest extends WebTestCase
 {
+    /**
+     * @TODO Intégrer les tests func
+     */
 
     private $client;
     private UserRepository $userRepository;

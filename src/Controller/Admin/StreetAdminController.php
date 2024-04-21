@@ -15,6 +15,9 @@ class StreetAdminController extends AbstractController
     #[Route('/admin/rue/{street}', name: 'app_admin_street_detail')]
     public function detail(): void { }
 
+    #[Route('/admin/creer/rue', name: 'app_admin_street_create')]
+    public function create() { }
+
     #[Route('/admin/rue/{street}/update', name: 'app_admin_street_update')]
     public function update(): void { }
 
