@@ -1,12 +1,19 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}{{ city }}{% endblock %}
+{% block title %}{{ city.name }}{% endblock %}
 
 {% block body %}
-
-{#  @TODO faire le rendu sous forme de tableau.  #}
-    <div style="height: 120px;"></div>
-    <p> {{ city.id }}</p>
-    <p> {{ city.name }}</p>
-
+    <div style="height: 80px;"></div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Détails de la Ville
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ city.name }}</h5>
+                <p class="card-text">ID de la ville: {{ city.id }}</p>
+            </div>
+        </div>
+    </div>
+    <div style="height: 80px;"></div>
 {% endblock %}
