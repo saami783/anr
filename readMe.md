@@ -15,7 +15,7 @@
 ## Mise en route
 
 L'application a besoin d'une version de PHP >= 8, de composer et npm (j'ai utilisé la v10.2.4).
-
+La base de données doit être sous MySQL.
 ***
 
 ## Installer les dépendances du projet :
