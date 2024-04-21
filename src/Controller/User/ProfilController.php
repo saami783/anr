@@ -95,6 +95,7 @@ class ProfilController extends AbstractController
             'avatarForm' => $avatarForm->createView(),
             'addressForm' => $addressForm->createView(),
             'address' => $address,
+            'avatar' => $avatar
         ]);
     }
 
