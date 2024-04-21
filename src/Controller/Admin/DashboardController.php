@@ -24,7 +24,7 @@ class DashboardController extends AbstractController
             $users = $userRepository->findByCityOrStreet($data['city'], $data['street']);
         }
 
-        return $this->render('views/admin/index.html.twig', [
+        return $this->render('admin/index.html.twig', [
             'form' => $form->createView(),
             'users' => $users,
         ]);

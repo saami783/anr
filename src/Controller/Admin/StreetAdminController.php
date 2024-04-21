@@ -32,7 +32,7 @@ class StreetAdminController extends AbstractController
             return $this->redirectToRoute('app_streets');
         }
 
-        return $this->render('views/admin/street/new.html.twig', [
+        return $this->render('admin/street/new.html.twig', [
             'streetForm' => $streetForm->createView(),
         ]);
     }
@@ -50,7 +50,7 @@ class StreetAdminController extends AbstractController
             return $this->redirectToRoute('app_streets');
         }
 
-        return $this->render('views/admin/street/update.html.twig', [
+        return $this->render('admin/street/update.html.twig', [
             'streetForm' => $streetForm->createView(),
             'street' => $street,
         ]);

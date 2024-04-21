@@ -13,13 +13,13 @@ class CityController extends AbstractController
     #[Route('/villes', name: 'app_cities')]
     public function index(CityRepository $cityRepository): Response
     {
-        return $this->render('views/public/city/index.html.twig', [
+        return $this->render('public/city/index.html.twig', [
             'cities' => $cityRepository->findAll(),
         ]);
     }
 
     #[Route('/ville/{id}', name: 'app_admin_city_detail')]
     public function detail(City $city): Response {
-        return $this->render('views/public/city/detail.html.twig', ['city' => $city]);
+        return $this->render('public/city/detail.html.twig', ['city' => $city]);
     }
 }

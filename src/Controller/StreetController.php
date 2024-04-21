@@ -13,14 +13,14 @@ class StreetController extends AbstractController
     #[Route('/rues', name: 'app_streets')]
     public function index(StreetRepository $streetRepository): Response
     {
-        return $this->render('views/public/street/index.html.twig', [
+        return $this->render('public/street/index.html.twig', [
             'streets' => $streetRepository->findAll(),
         ]);
     }
 
     #[Route('/rue/{id}', name: 'app_admin_street_detail')]
     public function detail(Street $street): Response {
-        return $this->render('views/public/street/detail.html.twig', [
+        return $this->render('public/street/detail.html.twig', [
             'street' => $street
         ]);
     }

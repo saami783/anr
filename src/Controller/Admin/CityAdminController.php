@@ -33,7 +33,7 @@ class CityAdminController extends AbstractController
             return $this->redirectToRoute('app_cities');
         }
 
-        return $this->render('views/admin/city/new.html.twig', [
+        return $this->render('admin/city/new.html.twig', [
             'cityForm' => $cityForm->createView(),
         ]);
     }
@@ -51,7 +51,7 @@ class CityAdminController extends AbstractController
             return $this->redirectToRoute('app_cities');
         }
 
-        return $this->render('views/admin/city/update.html.twig', [
+        return $this->render('admin/city/update.html.twig', [
             'cityForm' => $cityForm->createView(),
             'city' => $city,
         ]);

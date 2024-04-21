@@ -89,7 +89,7 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute('app_profil');
         }
 
-        return $this->render('views/user/profil/index.html.twig', [
+        return $this->render('user/profil/index.html.twig', [
             'infoForm' => $infoForm->createView(),
             'passwordForm' => $passwordForm->createView(),
             'avatarForm' => $avatarForm->createView(),
