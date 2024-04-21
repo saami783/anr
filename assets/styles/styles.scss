@@ -10,10 +10,10 @@
 // =========================================
 
 .icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   margin-right: 15px;
-  transform: translateX(60px);
+  transform: translateX(64px);
 }
 
 .image-container {
@@ -118,24 +118,36 @@
 #navbar {
   background-color: transparent;
   height: 100px;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .navbar-brand {
   color: $blue-gray;
   font-weight: 700;
   font-size: $h3-font-size;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .opaque-navbar {
   background-color: white !important;
-  transition: background-color 0.3s ease-in-out;
 }
 
-@media (min-width: $large-screen) {
-  #navbar .container-fluid {
-    width: 1300px;
+@media (max-width: 991px) {
+  #navbar {
+    background-color: white;
+    height: auto;
+  }
+  .navbar-brand {
+    font-size: $h4-font-size;
+  }
+  .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
   }
 }
+
 
 // =========================================
 // Footer

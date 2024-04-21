@@ -37,7 +37,7 @@ class UserFixtures extends Fixture {
         $user = new User();
         $user->setName($name);
         $user->setEmail($email);
-
+        $user->setCreatedAt(new \DateTimeImmutable());
         $plainPassword = 'Password123!';
         $user->setPassword(
             $this->userPasswordHasher->hashPassword(

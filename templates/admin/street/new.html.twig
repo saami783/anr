@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Créer une ville{% endblock %}
+
+{% block body %}
+
+    <div style="height: 120px;"></div>
+
+    <div class="example-wrapper">
+        <div class="container">
+
+            <section class="mb-4 p-3 bg-white rounded shadow" style="opacity: 0.98;">
+                <h2>Créer une rue</h2>
+                {{ form_start(streetForm, {'attr': {'class': 'form-horizontal w-50'}}) }}
+                {{ form_row(streetForm.city, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_row(streetForm.name, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                <button type="submit" class="btn btn-primary mt-2 btn-sm rounded-pill" style="width: auto;">
+                    Ajouter une nouvelle rue
+                </button>
+                {{ form_end(streetForm) }}
+            </section>
+        </div>
+    </div>
+{% endblock %}

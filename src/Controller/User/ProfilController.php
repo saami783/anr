@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\user;
+namespace App\Controller\User;
 
 use App\Entity\Address;
 use App\Entity\Avatar;
@@ -55,32 +55,47 @@ class ProfilController extends AbstractController
         $avatarForm->handleRequest($request);
         $addressForm->handleRequest($request);
 
+        $changesMade = false;
         if ($infoForm->isSubmitted() && $infoForm->isValid()) {
+            $user->setUpdatedAt(new \DateTimeImmutable());
             $this->userRepository->save($user, true);
+            $changesMade = true;
         }
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
             $newPlainTextPassword = $passwordForm->get('plainPassword')->getData();
+            $user->setUpdatedAt(new \DateTimeImmutable());
             $this->userRepository->upgradePassword($user, $newPlainTextPassword);
+            $changesMade = true;
         }
         if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+            if ($avatar->getUser() === null) {
+                $avatar->setUser($user);
+            }
+            $avatar->getUser()->setUpdatedAt(new \DateTimeImmutable());
             $this->entityManager->persist($avatar);
+            $changesMade = true;
         }
         if ($addressForm->isSubmitted() && $addressForm->isValid()) {
+            $address->setStreet($addressForm->get('street')->getData());
+            $address->setUser($this->getUser());
+            $address->getUser()->setUpdatedAt(new \DateTimeImmutable());
             $this->entityManager->persist($address);
+            $changesMade = true;
         }
 
-        if ($infoForm->isSubmitted() || $passwordForm->isSubmitted() ||
-            $avatarForm->isSubmitted() || $addressForm->isSubmitted())
-        {
+        if ($changesMade) {
             $this->entityManager->flush();
+            $this->addFlash('success', 'Les modifications ont bien été apportées.');
             return $this->redirectToRoute('app_profil');
         }
 
-        return $this->render('views/user/profil/index.html.twig', [
+        return $this->render('user/profil/index.html.twig', [
             'infoForm' => $infoForm->createView(),
             'passwordForm' => $passwordForm->createView(),
             'avatarForm' => $avatarForm->createView(),
             'addressForm' => $addressForm->createView(),
+            'address' => $address,
+            'avatar' => $avatar
         ]);
     }
 

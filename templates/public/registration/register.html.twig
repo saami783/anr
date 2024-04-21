@@ -14,19 +14,19 @@
                     {{ form_label(registrationForm.name) }}
                     {{ form_errors(registrationForm.name) }}
                 </div>
-
+                <div style="height: 15px;"></div>
                 <div class="form-floating">
                     {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.email) }}
                     {{ form_errors(registrationForm.email) }}
                 </div>
-
+                <div style="height: 15px;"></div>
                 <div class="form-floating">
                     {{ form_widget(registrationForm.password, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.password) }}
                     {{ form_errors(registrationForm.password) }}
                 </div>
-
+                <div style="height: 25px;"></div>
                 <div class="form-floating">
                     {{ form_widget(registrationForm.city, {'attr': {'class': 'form-input dynamic-city-select'}}) }}
                     {{ form_label(registrationForm.city) }}

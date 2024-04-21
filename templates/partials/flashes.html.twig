@@ -1,17 +1,25 @@
-{% for flash_message in app.flashes('error') %}
-    <div class="alert alert-danger">
-        {{ flash_message }}
-    </div>
-{% endfor %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="accordion-collapse">
+                {% for flash_message in app.flashes('error') %}
+                    <div class="alert alert-danger">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
 
-{% for flash_message in app.flashes('warning') %}
-    <div class="alert alert-warning">
-        {{ flash_message }}
-    </div>
-{% endfor %}
+                {% for flash_message in app.flashes('warning') %}
+                    <div class="alert alert-warning">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
 
-{% for flash_message in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ flash_message }}
+                {% for flash_message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-{% endfor %}
+</div>

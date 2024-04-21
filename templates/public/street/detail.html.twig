@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}{{ street.name }}{% endblock %}
+
+{% block body %}
+    <div style="height: 80px;"></div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Détails de la Rue
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ street.name }}</h5>
+                <p class="card-text">ID de la rue: {{ street.id }}</p>
+                <p class="card-text">Ville associée: {{ street.city.name }}</p>
+            </div>
+        </div>
+    </div>
+    <div style="height: 80px;"></div>
+{% endblock %}

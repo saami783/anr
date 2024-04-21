@@ -40,10 +40,6 @@ class AddressFormType extends AbstractType
                 'label' => 'Numéro de rue',
                 'required' => true,
             ])
-            ->add('save', SubmitType::class, [
-                'label' => "Sauvegarder",
-                'attr' => ['class' => 'btn-secondary']
-            ])
         ;
         $builder->get('city')->addEventListener(
             FormEvents::POST_SUBMIT,

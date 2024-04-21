@@ -1,0 +1,92 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+
+    <div style="height: 100px;"></div>
+    {% include '/partials/flashes.html.twig' %}
+
+    <div class="example-wrapper">
+        <div class="container">
+            <h1 class="mb-3">Gestion de votre compte</h1>
+            <p class="lead">Mettez à jour vos informations personnelles, changez votre mot de passe ou mettez à jour
+                votre adresse
+                pour assurer que votre profil reste à jour.</p>
+
+            <!-- Informations du compte -->
+            <section class="mb-4 p-3 bg-white rounded shadow" style="opacity: 0.98;">
+                <h2>Informations du compte</h2>
+                {{ form_start(infoForm, {'attr': {'class': 'form-horizontal w-50'}}) }}
+                {{ form_row(infoForm.email, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                {{ form_row(infoForm.name, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                <button type="submit" class="btn btn-primary mt-2 btn-sm rounded-pill" style="width: auto;">Sauvegarder
+                    les informations
+                </button>
+                {{ form_end(infoForm) }}
+            </section>
+
+            <!-- Mise à jour du mot de passe -->
+            <section class="mb-4 p-3 bg-white rounded shadow" style="opacity: 0.98;">
+                <h2>Mettre à jour le mot de passe</h2>
+                {{ form_start(passwordForm, {'attr': {'class': 'form-horizontal w-50'}}) }}
+                {{ form_row(passwordForm.plainPassword, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                <button type="submit" class="btn btn-primary mt-2 btn-sm rounded-pill" style="width: auto;">Changer le
+                    mot de passe
+                </button>
+                {{ form_end(passwordForm) }}
+            </section>
+
+            <!-- Avatar -->
+            <section class="mb-4 p-3 bg-white rounded shadow" style="opacity: 0.98;">
+                <h2>Avatar</h2>
+
+                {{ form_start(avatarForm, {'attr': {'class': 'form-horizontal w-50'}}) }}
+                {{ form_widget(avatarForm, {'attr': {'class': 'form-control-file'}}) }}
+                {% if avatar.fileName %}
+                    <img src="{{ asset('uploads/avatars/' ~ avatar.fileName) }}"
+                         style="width: 70px; height: 70px;" alt="avatar"/> <br>
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary mt-2 btn-sm rounded-pill" style="width: auto;">Mettre à
+                    jour l'avatar
+                </button>
+                {{ form_end(avatarForm) }}
+            </section>
+
+            <!-- Adresse -->
+            <section class="mb-4 p-3 bg-white rounded shadow" style="opacity: 0.98;">
+                <h2>Mon adresse</h2>
+                {% if address.id %}
+                    <p>{{ address }}</p>
+                    <a href="{{ path('app_delete_address', {'id': address.id}) }}" class="btn btn-danger rounded-pill"
+                       style="width: auto;">
+                        Supprimer mon adresse
+                    </a>
+                {% endif %}
+                <div class="pt-1"></div>
+                {{ form_start(addressForm, {'attr': {'class': 'form-horizontal w-50'}}) }}
+                {{ form_row(addressForm.city, {'attr': {'class': 'dynamic-city-select form-control form-control-sm'}}) }}
+                {{ form_row(addressForm.street, {'attr': {'class': 'dynamic-street-select form-control form-control-sm'}}) }}
+                {{ form_row(addressForm.number, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                <button type="submit" class="btn btn-primary mt-2 btn-sm rounded-pill" style="width: auto;">Mettre à
+                    jour l'adresse
+                </button>
+                {{ form_end(addressForm) }}
+            </section>
+
+            <!-- Suppression du compte -->
+            <section class="mb-4 p-3 bg-white rounded shadow" style="opacity: 0.98;">
+                <h2>Supprimer mon compte</h2>
+                <p>Une fois votre compte supprimé, toutes ses ressources et données seront définitivement
+                    supprimées.</p>
+                <a href="{{ path('app_profil_delete') }}" class="btn btn-danger btn-sm rounded-pill"
+                   style="width: auto;">Supprimer mon compte</a>
+            </section>
+        </div>
+    </div>
+    <div class="pb-5"></div>
+    {% block scripts %}
+        {{ encore_entry_script_tags('dynamic-street-loader') }}
+    {% endblock %}
+{% endblock %}

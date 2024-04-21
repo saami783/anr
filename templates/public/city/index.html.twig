@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Villes{% endblock %}
+
+{% block body %}
+    <div style="height: 80px;"></div>
+    <div class="container mt-5">
+        <h1>Liste des Villes</h1>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_admin_city_create') }}" class="btn btn-success">Créer</a>
+        {% endif %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for city in cities %}
+                {% if loop.index % 2 == 0 %}
+                    <tr style="background-color: lightgrey;">
+                {% else %}
+                    <tr style="background-color: white;">
+                {% endif%}
+                    <td>{{ city.id }}</td>
+                    <td>{{ city.name }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_city_detail', {'id': city.id}) }}" class="btn btn-info btn-sm">Consulter</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('app_admin_city_update', {'id': city.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <form action="{{ path('app_admin_city_delete', {'id': city.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr?');" style="display: inline-block;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="">
+                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
