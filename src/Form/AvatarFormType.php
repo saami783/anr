@@ -19,10 +19,11 @@ class AvatarFormType extends AbstractType
                 'delete_label' => 'Supprimer mon avatar',
                 'download_uri' => true,
                 'download_label' => 'Télécharger mon avatar',
+                'image_uri' => false, // Ne pas générer automatiquement l'URI de l'image
                 'label' => 'Avatar (Format png, jpg, jpeg)',
-                'imagine_pattern' => 'my_thumb',
             ]);
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

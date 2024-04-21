@@ -40,8 +40,14 @@
             <!-- Avatar -->
             <section class="mb-4 p-3 bg-white rounded shadow" style="opacity: 0.98;">
                 <h2>Avatar</h2>
+
                 {{ form_start(avatarForm, {'attr': {'class': 'form-horizontal w-50'}}) }}
                 {{ form_widget(avatarForm, {'attr': {'class': 'form-control-file'}}) }}
+                {% if avatar.fileName %}
+                    <img src="{{ asset('uploads/avatars/' ~ avatar.fileName) }}"
+                         style="width: 70px; height: 70px;" alt="avatar"/> <br>
+                {% endif %}
+
                 <button type="submit" class="btn btn-primary mt-2 btn-sm rounded-pill" style="width: auto;">Mettre à
                     jour l'avatar
                 </button>
