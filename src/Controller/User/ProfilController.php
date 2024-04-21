@@ -57,11 +57,13 @@ class ProfilController extends AbstractController
 
         $changesMade = false;
         if ($infoForm->isSubmitted() && $infoForm->isValid()) {
+            $user->setUpdatedAt(new \DateTimeImmutable());
             $this->userRepository->save($user, true);
             $changesMade = true;
         }
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
             $newPlainTextPassword = $passwordForm->get('plainPassword')->getData();
+            $user->setUpdatedAt(new \DateTimeImmutable());
             $this->userRepository->upgradePassword($user, $newPlainTextPassword);
             $changesMade = true;
         }
@@ -69,12 +71,14 @@ class ProfilController extends AbstractController
             if ($avatar->getUser() === null) {
                 $avatar->setUser($user);
             }
+            $avatar->getUser()->setUpdatedAt(new \DateTimeImmutable());
             $this->entityManager->persist($avatar);
             $changesMade = true;
         }
         if ($addressForm->isSubmitted() && $addressForm->isValid()) {
             $address->setStreet($addressForm->get('street')->getData());
             $address->setUser($this->getUser());
+            $address->getUser()->setUpdatedAt(new \DateTimeImmutable());
             $this->entityManager->persist($address);
             $changesMade = true;
         }
