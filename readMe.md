@@ -1,4 +1,4 @@
-# CityConnect, test technique anr en Symfony 6.4
+# CityConnect, test technique anr avec Symfony 6.4
 
 ## Liste des fonctionnalités de l'application :
 
